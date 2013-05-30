@@ -1,12 +1,12 @@
 source "http://rubygems.org"
 
-gem "rails", "3.2.6"
+gem "rails", "3.2.11"
 
 gem 'will_paginate'
-gem "ya2yaml"
+gem 'safe_yaml', '>= 0.8.6'
 
 group 'test' do
-  gem "capybara", :git => "https://github.com/jnicklas/capybara.git"
+  gem 'capybara-webkit'
   gem "factory_girl_rails"
   gem "sqlite3"
   gem "mocha"

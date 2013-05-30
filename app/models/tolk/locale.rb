@@ -55,7 +55,7 @@ module Tolk
         secondary_locales.each do |locale|
           File.open("#{to}/#{locale.name}.yml", "w+") do |file|
             data = locale.to_hash
-            data.respond_to?(:ya2yaml) ? file.write(data.ya2yaml(:syck_compatible => true)) : YAML.dump(locale.to_hash, file)
+            data.respond_to?(:ya2yaml) ? file.write(data.ya2yaml(:syck_compatible => true)) : file.write(YAML.dump(data).force_encoding file.external_encoding.name)
           end
         end
       end
@@ -87,6 +87,10 @@ module Tolk
     def count_phrases_without_translation
       existing_ids = self.translations.all(:select => 'tolk_translations.phrase_id').map(&:phrase_id).uniq
       Tolk::Phrase.count - existing_ids.count
+    end
+
+    def count_phrases_with_updated_translation(page = nil)
+      find_phrases_with_translations(page, :'tolk_translations.primary_updated' => true).count
     end
 
     def phrases_without_translation(page = nil, options = {})
@@ -180,16 +184,16 @@ module Tolk
         end
       end
     end
-    
+
     private
 
 
     def remove_invalid_translations_from_target
       self.translations.target.dup.each do |t|
-         unless t.valid?
+        unless t.valid?
           self.translations.target.delete(t)
         else
-          t.updated_at = Time.current # Silly hax to fool autosave into saving the record
+          t.updated_at_will_change!
         end
       end
 

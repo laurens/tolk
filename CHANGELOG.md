@@ -1,3 +1,31 @@
+* Tolk 1.3.9
+  * Activate deserialize_symbols option of SafeYaml, if not, Rails date_select will be broken...
+
+* Tolk 1.3.8
+  * Update safe_yaml to 0.8.6, fixes issue : invalid value for Float(): "." (#29)
+  * Fixed download locale yml file (@fcsonline)
+  * Added interpolations keys validations (@fcsonline)
+  * Added an alert when leave the page with non saved data (@fcsonline)
+  * Added statistics endpoint (@fcsonline)
+  * Fixed Portuguese Brazilian locale code (@fcsonline)
+
+* Tolk 1.3.7
+  * Removing a js warning of scriptaculous
+  * Adding Gemfile.lock for tests to pass
+  * Use safe_load (Larry Lv)
+  * Remove warning of safe_yaml
+
+* Tolk 1.3.6
+  * Better sync (@elDub)
+  * Better safe_yaml warnings support (@mangelajo)
+  * Better safe_yaml warnings support (@mangelajo)
+
+* Tolk 1.3.5
+  * Fixed CVE-2013-0156 (Lawrence Pit)
+  * Added possibility to refresh locale ui (@ck3g)
+  * Namespace locale parameter (laurense)
+  * Removed an old Hax which delayed this release for 1 week...
+
 * Tolk 1.3.4
   * fixed a boolean flags entry
 
